@@ -62,8 +62,6 @@ async function onUserUpdate(){
     });
 }
 
-
-
 function onModalsOpen(){
     $('#modaledit').on('show.bs.modal', async function (event) {
         const button = $(event.relatedTarget);
@@ -94,7 +92,7 @@ function addData(data){
 function showData(data){
     $("#tbody").append(`
         <tr>
-            <td>${data.id}</td>
+            <td>${data._id}</td>
             <td>${data.name}</td>
             <td>${data.username}</td>
             <td>${data.email}</td>
@@ -102,7 +100,7 @@ function showData(data){
             <td aria-label="edit" class="d-flex justify-content-center">
                 <button class="btn btn-primary btn-sm"
                 data-bs-toggle="modal" data-bs-target="#modaledit"
-                data-bs-id="${data.id}">
+                data-bs-id="${data._id}">
                     <i class="fa-solid fa-edit"></i>
                 </butt>
             </td>
