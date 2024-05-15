@@ -1,0 +1,157 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<section class="bg-dark rounded-4 p-3 animate__animated animate__fadeInUp position-relative" style="z-index: 999;">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modaladd">
+                <i class="fa-solid fa-plus"></i> New User
+            </button>   
+            <form autocomplete="off" method="post" action="" id="formdeBuscar">
+                <div class="form-icon icon-left">
+                    <input type="text" class="form-control form-noshadow" placeholder="Buscar..." id="barraBuscar">
+                    <i class="fa-solid fa-search "></i>
+                </div>
+            </form>
+            <script>
+                document.getElementById("formdeBuscar").addEventListener("keypress", function(event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                    }
+                });
+            </script>
+        </div>
+        <div class="d-flex justify-content-end gap-2 ">
+            <div id="length"></div>
+        </div>
+    </div>
+</section>
+<div class="bg-dark table-container my-3 animate__animated animate__fadeInUp position-relative bg-white rounded-3" id="table-container">
+    <table class="bg-dark table table-custom table-striped table-responsive nowrap align-middle position-relative w-100" id="table" style="margin: 0 !important;" >
+        <thead>
+            <tr id="thead">
+                <th scope="col">ID</th>
+                <th scope="col" data-priority="1">Name</th>
+                <th scope="col" data-priority="2">Username</th>
+                <th scope="col" data-priority="3">Email</th>
+                <th scope="col" data-priority="4">Password</th>
+                <th scope="col" data-priority="5">Editar</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr class="placeholder-glow">
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+            </tr>
+            <tr class="placeholder-glow">
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+                <td><span class="placeholder col-12"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-between align-items-center py-2 px-3 rounded-3 bg-dark animate__animated animate__fadeInUp mb-3">
+    <small class="text-light" id="info">
+        <div class="placeholder-glow">
+            <span class="placeholder col-12">-------------------------</span>
+        </div>
+    </small>
+    <div class="pagination-tables" id="pagination">
+        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+    </div>
+</div>
+<!-- ? Modal de actualizar -->
+<div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="modaleditLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold mb-0 d-block" id="modaleditLabel">
+                    <i class="fa-solid fa-hashtag"></i> <small id="idmodal-label" class="small text-secondary"></small>
+                </h5>
+                
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-0">
+                <div class="row mx-0 g-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="editname" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editname" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="editusername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="editusername" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="editemail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editemail" placeholder="Email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pb-2 px-3">
+                <button type="button" class="btn btn-gray" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
+                <button type="button" class="btn btn-dark" id="deleteUser">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+                <button type="button" class="btn btn-primary" id="updateUser"><i class="fa-solid fa-floppy-disk"></i> Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ? Modal Agregar -->
+<div class="modal fade" id="modaladd" tabindex="-1" aria-labelledby="modaladdLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold mb-0 d-block" id="modaladdLabel"><i class="fa-solid fa-plus"></i> Add New User</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pb-0">
+                <div class="row mx-0 g-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="addname" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="addname" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="addusername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="addusername" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="addemail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="addemail" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="addpassword" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="addpassword" placeholder="********" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pb-2 px-3">
+                <button type="button" class="btn btn-gray" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i> Close</button>
+                <button type="button" class="btn btn-primary" id="addUser"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
